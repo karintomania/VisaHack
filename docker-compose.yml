@@ -11,6 +11,7 @@ services:
       - "./container_resource/apache2/000-default.conf:/etc/apache2/sites-available/000-default.conf"
     ports:
       - "8000:80"
+      - "5173:5173"
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
