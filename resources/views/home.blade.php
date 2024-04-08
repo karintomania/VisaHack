@@ -30,11 +30,13 @@
                         <input class="px-2 py-4 grow outline-none" type="text" placeholder="Keywords"></input>
                     </div>
                     <div class="border-neutral-300 border grow flex items-center">
+                        @use('App\Enums\Countries')
                         <span class="pl-2">🌐</span>
                         <select class="p-2 py-4 grow outline-none">
                               <option value="">Country</option>
-                              <option value="volvo">United Kingdom</option>
-                              <option value="saab">United Sates</option>
+                              @foreach(Countries::cases() as $country)
+                                  <option value="{{$country->value}}">{{$country->label()}}</option>
+                              @endforeach
                         </select>
                     </div>
                     <input class="bg-main text-white px-4 py-2" type="submit" value="Search"></input>

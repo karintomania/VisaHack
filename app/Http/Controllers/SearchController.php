@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobPost;
+use App\Enums\Countries;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
@@ -16,10 +17,12 @@ class SearchController extends Controller
 
     function __invoke(): View|Factory
     {
-        $country = 'GB';
+        $country = Countries::GB;
+        $keywords = "python";
 
         /** @var Collection|JobPost[] $jobs */
-        $jobs = JobPost::ofCountry($country)
+        $jobs = JobPost::whereCountry($country)
+                    ->where('description', 'like', "%php%")
                     ->orderBy('created_at', 'desc')
                    ->take(5)
                    ->get();;
