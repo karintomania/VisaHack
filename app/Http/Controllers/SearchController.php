@@ -23,21 +23,26 @@ class SearchController extends Controller
 
         $query = $this->buildQuery($validated);
 
-        $jobs = $query->get();
+        $jobs = $query->paginate(10)->withQueryString();
 
         return view('home', ['jobs' => $jobs]);
+
     }
 
     private function buildQuery(array $validated): Builder
     {
-        $query = JobPost::select();
+        $query = JobPost::active();
 
         if (isset($validated['keywords']) && $validated['keywords']) {
-            $query = $query->where('description', 'like', "%{$validated['keywords']}%");
+            $keywords = explode(',', $validated['keywords']);
+            foreach($keywords as $keyword){
+                $keyword = trim($keyword);
+                $query = $query->where('description', 'like', "%${keyword}%");
+            }
         }
 
         if (isset($validated['country']) && $validated['country']) {
-            $query->whereCountry(Countries::from($validated['country']));
+            $query->country(Countries::from($validated['country']));
         }
 
         return $query->orderBy('created_at', 'desc')->take(5);

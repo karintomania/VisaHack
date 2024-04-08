@@ -10,8 +10,8 @@ enum Countries: string
     public function label(): string
     {
         return match ($this) {
-            Countries::GB => 'United Kingdom',
-            Countries::US => 'United States',
+            Countries::GB => '🇬🇧 United Kingdom',
+            Countries::US => '🇺🇸 United States',
         };
     }
 }

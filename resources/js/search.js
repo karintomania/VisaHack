@@ -7,3 +7,4 @@ export function toggleDetail(id){
   const summary = document.getElementById(summary_id);
   summary.classList.toggle('hidden');
 }
+
