@@ -4,18 +4,17 @@ namespace App\Models;
 
 use App\Enums\Countries;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class JobPost extends Model
 {
     use HasFactory;
 
-
     public function scopwhereCountry(Builder $query, Countries $country): void
     {
-        $query->where("country", $country->value);
+        $query->where('country', $country->value);
     }
 
     protected function country(): Attribute
@@ -26,14 +25,14 @@ class JobPost extends Model
         );
     }
 
-    public function getPlainDescription():string
+    public function getPlainDescription(): string
     {
         $description = $this->description;
-        $regex= '/\<\/?.+?\>/';
+        $regex = '/\<\/?.+?\>/';
         $plain = preg_replace($regex, '', $description);
 
-        $plain = str_replace("`", "", $plain);
-        
+        $plain = str_replace('`', '', $plain);
+
         return $plain;
     }
 }
