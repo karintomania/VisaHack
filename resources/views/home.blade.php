@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+         @vite('resources/js/app.js')
          @vite('resources/css/app.css')
 
         <title>VisaHack</title>
@@ -47,7 +48,9 @@
                 @foreach ($jobs as $job)
                 <div class="w-full border border-neutral-300 bg-white px-6 py-4">
                     <div class="flex justify-between items-start">
-                        <h2 class="text-2xl text-neutral-600 font-bold underline">{{ $job->title }}</h2>
+                        <h2 
+                            class="text-2xl text-neutral-600 font-bold underline"
+                            onClick='search.toggleDetail({{$job->id}})'>{{ $job->title }}</h2>
                         <a class="bg-main text-white px-4 py-2 bold">Apply</a>
                     </div>
                     <div class="mb-2">Posted at {{substr($job->created_at, 0, 10)}} by {{$job->company}}</div>
@@ -62,11 +65,14 @@
                             <span class="bg-lime-100 px-1">{{$job->job_type}}</span>
                         @endif
                     </div>
-                    <div class="mb-4">
+                    <div id="job_summary_{{$job->id}}" class="mb-4">
                         <p>{{substr($job->getPlainDescription(), 0, 400)}}...</p>
+                        <div onClick='search.toggleDetail({{$job->id}})' class="underline text-lg">Read more...</div>
                     </div>
-                    <div>
-                        <a class="underline">Read more...</a>
+                    <div id="job_detail_{{$job->id}}" class="hidden mb-4 list-disc">
+                        <div onClick='search.toggleDetail({{$job->id}})' 
+                            class="underline mb-4 text-lg">Read less...</div>
+                        <p>{!!$job->description!!}</p>
                     </div>
                 </div>
                 @endforeach
