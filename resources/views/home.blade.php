@@ -22,16 +22,16 @@
                 <h1 class="text-3xl text-neutral-600 font-bold mb-4">Work Anywhere with <span class="text-main">VisaHack</span></h1>
                 <p class="text-lg">VisaHack is a job board specialised to find jobs in tech industry with visa sponsorships. You can find your dream job in your dream country.</p>
             </section>
-            <section class="bg-white w-2/3  mb-8">
+            <section class="bg-white w-3/5  mb-12">
                 <!-- search box -->
                 <form class="w-full flex justify-between">
                     <div class="border-neutral-300 border grow flex items-center">
                         <span class="pl-2">🔍</span>
-                        <input class="p-2 grow outline-none" type="text" placeholder="Keywords"></input>
+                        <input class="px-2 py-4 grow outline-none" type="text" placeholder="Keywords"></input>
                     </div>
                     <div class="border-neutral-300 border grow flex items-center">
                         <span class="pl-2">🌐</span>
-                        <select class="p-2 grow outline-none">
+                        <select class="p-2 py-4 grow outline-none">
                               <option value="">Country</option>
                               <option value="volvo">United Kingdom</option>
                               <option value="saab">United Sates</option>
@@ -40,25 +40,34 @@
                     <input class="bg-main text-white px-4 py-2" type="submit" value="Search"></input>
                 </form>
             </section>
-            <section class="flex justify-center w-2/3">
+            <div class="w-3/5 border border-neutral-300 mb-12"></div>
+            <section class="flex flex-col items-center gap-6 w-2/3 mb-10">
+                @foreach ($jobs as $job)
                 <div class="w-full border border-neutral-300 bg-white px-6 py-4">
-                    <div class="flex justify-between">
-                        <h2 class="text-2xl text-neutral-600 font-bold underline">Senior PHP Developer</h2>
+                    <div class="flex justify-between items-start">
+                        <h2 class="text-2xl text-neutral-600 font-bold underline">{{ $job->title }}</h2>
                         <a class="bg-main text-white px-4 py-2 bold">Apply</a>
                     </div>
-                    <div class="mb-2">Posted at 2024/3/1 by Acme Company</div>
-                    <div class="mb-4 text-lg flex gap-4">
-                        <span>50,000 - 60,000 GBP</span>
-                        <span>London</span>
-                        <span>Full Time</span>
+                    <div class="mb-2">Posted at {{substr($job->created_at, 0, 10)}} by {{$job->company}}</div>
+                    <div class="mb-4 flex gap-4">
+                        @if ($job->salary)
+                            <span class="bg-orange-100 px-1">{{$job->salary}}</span>
+                        @endif
+                        <span class="bg-teal-100 px-1">
+                            @if ($job->location){{$job->location}},&nbsp;@endif{{$job->country}}
+                        </span>
+                        @if ($job->job_type) 
+                            <span class="bg-lime-100 px-1">{{$job->job_type}}</span>
+                        @endif
                     </div>
                     <div class="mb-4">
-                        <p>Senior Web Developer Cardiff / WFH to 65k Do you have strong PHP backend development skills and exposure across the full tech stack? You could be progressing your career in a senior, hands-on role for a digital transformation consultancy / agency, wo...</p>
+                        <p>{{substr($job->getPlainDescription(), 0, 400)}}...</p>
                     </div>
                     <div>
                         <a class="underline">Read more...</a>
                     </div>
                 </div>
+                @endforeach
             </section>
 
         </main>
