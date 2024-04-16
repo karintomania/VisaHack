@@ -35,7 +35,7 @@ class SearchController extends Controller
 
         if (isset($validated['keywords']) && $validated['keywords']) {
             $keywords = explode(',', $validated['keywords']);
-            foreach($keywords as $keyword){
+            foreach ($keywords as $keyword) {
                 $keyword = trim($keyword);
                 $query = $query->where('description', 'like', "%${keyword}%");
             }
