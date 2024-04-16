@@ -9,3 +9,9 @@
     list-style-position: inside;
   }
 }
+
+@layer components {
+  .btn-main {
+    @apply bg-main text-white font-bold hover:bg-main-dark;
+  }
+}

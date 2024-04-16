@@ -3,11 +3,11 @@
 ])
 
 <div class="w-full border border-neutral-300 bg-white px-6 py-4">
-    <div class="flex flex-col justify-between items-start gap-4">
+    <div class="flex flex-row justify-between items-start gap-4">
         <h2 
             class="text-2xl text-neutral-600 font-bold underline cursor-pointer"
             onClick='search.toggleDetail({{$job->id}})'>{{ $job->title }}</h2>
-        <a class="hidden sm:inline bg-main text-white px-4 py-2 bold" href="{{$job->url}}" target="_blank">Apply</a>
+        <a class="hidden sm:inline btn-main px-4 py-2" href="{{$job->url}}" target="_blank">Apply</a>
     </div>
     <div class="mb-2">Posted at {{substr($job->created_at, 0, 10)}} by {{$job->company}}</div>
     <div class="mb-4 flex flex-row flex-wrap gap-2 sm:gap-4">
@@ -38,6 +38,6 @@
     </div>
 
     <div class="flex justify-center">
-    <a class="block sm:hidden w-3/4 bg-main text-white text-center font-bold px-4 py-2 bold" href="{{$job->url}}" target="_blank">Apply</a>
+    <a class="block sm:hidden w-3/4 btn-main text-center px-4 py-2" href="{{$job->url}}" target="_blank">Apply</a>
     </div>
 </div>

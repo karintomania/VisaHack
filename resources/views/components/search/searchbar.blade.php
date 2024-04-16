@@ -2,7 +2,7 @@
     'errors',
 ])
 
-<div class="w-full sm:w-3/5  mb-12">
+<div class="w-full sm:w-4/5 lg:w-3/5 mb-12">
     <!-- search box -->
     <form class="w-full flex flex-col sm:flex-row justify-between gap-3 sm:gap-0" action="{{url('/')}}">
         <div class="bg-white border-neutral-300 border grow flex items-center">
@@ -23,7 +23,7 @@
                   @endforeach
             </select>
         </div>
-        <input class="bg-main text-white px-4 py-2" type="submit" value="Search"></input>
+        <input class="btn-main px-4 py-2" type="submit" value="Search"></input>
     </form>
     @if ($errors->any())
         <div class="bg-red-200 px-4">

@@ -1,7 +1,7 @@
 @props([
     'jobs',
 ])
-<section class="flex flex-col items-center gap-6 w-full sm:w-2/3 mb-10">
+<section class="flex flex-col items-center gap-6 w-full md:w-2/3 mb-10">
     @if($jobs->total() > 0)
     <div class="px-4 w-full font-bold">
         {{$jobs->total()}} results founds
