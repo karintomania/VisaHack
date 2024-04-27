@@ -10,7 +10,7 @@ RUN apt-get -y update \
 
 # Installation of Node.js: using NodeSource's setup script to install the latest version
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt-get install -y nodejs
+    apt-get install -y nodejs npm
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 CMD apachectl -D FOREGROUND

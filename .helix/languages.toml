@@ -1,0 +1,14 @@
+[[language]]
+name = "php"
+scope = "source.php"
+# language-servers = ["phpactor" ]
+language-servers = ["psalm","phpactor" ]
+
+[language-server.phpactor]
+command = "phpactor"
+args = [ "language-server" ]
+
+[language-server.psalm]
+command = "psalm.phar"
+args = ["--language-server"]
+
