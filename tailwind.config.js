@@ -8,10 +8,15 @@ export default {
   theme: {
     extend: {
       colors: {
+        "base": {
+          DEFAULT: "#0F1C2C",
+          light: "#222a3d",
+        },
         "main": {
-          DEFAULT: "#07C4C4",
+          DEFAULT: "#00AEAE",
           dark: "#05B5B5"
         },
+        "onbase": "#334164",
       },
       fontFamily: {
         sans: ['Helvetica', 'Arial', 'sans-serif'],

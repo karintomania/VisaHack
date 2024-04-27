@@ -1,8 +1,10 @@
 <x-layouts.base>
-    <section class="flex flex-col items-center w-full md:w-1/2 mb-10">
+    <section class="flex flex-col items-center w-full md:w-1/2 mb-20">
         <!-- hero -->
-        <h1 class="text-3xl text-neutral-600 font-bold mb-4">Work Anywhere with <span class="text-main">VisaHack</span></h1>
-        <p class="text-lg">VisaHack is a job board specialised to discover tech jobs complemented by visa sponsorship. Land your dream job in your dream country.</p>
+        <h1 class="text-2xl mb-4 text-center font-bold">
+            <div class="text-gray-300 mb-2 block sm:inline">Work Anywhere with</div>
+            <div class=" block sm:inline text-3xl text-main">VisaHack</div>
+        </h1>
     </section>
     <x-search.searchbar :errors="$errors"/>
     <x-search.result :jobs="$jobs"/>

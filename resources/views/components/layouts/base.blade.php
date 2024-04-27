@@ -12,7 +12,7 @@
         <title>VisaHack</title>
 
     </head>
-    <body class="text-neutral-500 bg-neutral-100">
+    <body class="text-gray-400 bg-base">
         <x-layouts.header/>
         <main class="flex flex-col items-center px-4">
           {{ $slot }}

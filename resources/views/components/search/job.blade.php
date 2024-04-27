@@ -2,10 +2,10 @@
     'job',
 ])
 
-<div class="w-full border border-neutral-300 bg-white px-6 py-4">
+<div class="w-full bg-base-light px-6 py-4 border border-gray-700">
     <div class="flex flex-row justify-between items-start gap-4">
         <h2 
-            class="text-2xl text-neutral-600 font-bold underline cursor-pointer"
+            class="text-2xl text-gray-300 font-bold underline cursor-pointer"
             onClick='search.toggleDetail({{$job->id}})'>{{ $job->title }}</h2>
         <a class="hidden sm:inline btn-main px-4 py-2" href="{{$job->url}}" target="_blank">Apply</a>
     </div>
@@ -13,17 +13,17 @@
     <div class="mb-4 flex flex-row flex-wrap gap-2 sm:gap-4">
         @if ($job->salary)
         <div>
-            <span class="bg-orange-100 px-1">{{$job->salary}}</span>
+            <span class="text-yellow-600 font-bold border border-yellow-500 px-2 py-1">{{$job->salary}}</span>
         </div>
         @endif
         <div>
-        <span class="bg-teal-100 px-1">
+        <span class="text-lime-600 font-bold border border-lime-500 px-2 py-1">
             @if ($job->location){{$job->location}},&nbsp;@endif{{$job->country}}
         </span>
         </div>
         @if ($job->job_type) 
         <div>
-            <span class="bg-lime-100 px-1">{{$job->job_type}}</span>
+            <span class="text-sky-600 font-bold border border-sky-500 px-2 py-1">{{$job->job_type}}</span>
         </div>
         @endif
     </div>
