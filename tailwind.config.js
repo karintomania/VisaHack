@@ -16,6 +16,10 @@ export default {
           DEFAULT: "#00AEAE",
           dark: "#05B5B5"
         },
+        "secondary": {
+          DEFAULT: "#07A6FF",
+          dark: "#05B5B5"
+        },
         "onbase": "#334164",
       },
       fontFamily: {

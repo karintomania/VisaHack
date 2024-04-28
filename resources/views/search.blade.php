@@ -6,6 +6,9 @@
             <div class=" block sm:inline text-3xl text-main">VisaHack</div>
         </h1>
     </section>
-    <x-search.searchbar :errors="$errors"/>
+
+    <section class="w-full sm:w-4/5 lg:w-3/5 mb-12">
+        <x-search.searchbar :errors="$errors"/>
+    </section>
     <x-search.result :jobs="$jobs"/>
 </x-layouts.base>

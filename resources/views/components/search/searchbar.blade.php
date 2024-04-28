@@ -2,7 +2,7 @@
     'errors',
 ])
 
-<div class="w-full sm:w-4/5 lg:w-3/5 mb-12 text-gray-400">
+<div class="w-full text-gray-400">
     <!-- search box -->
     <form class="w-full flex flex-col sm:flex-row justify-between gap-3 sm:gap-0" action="{{url('/search')}}">
         <div class="bg-base border-main border grow flex items-center">
