@@ -25,7 +25,7 @@ class SearchController extends Controller
 
         $jobs = $query->paginate(10)->withQueryString();
 
-        return view('home', ['jobs' => $jobs]);
+        return view('search', ['jobs' => $jobs]);
 
     }
 
