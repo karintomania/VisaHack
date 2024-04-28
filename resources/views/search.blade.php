@@ -7,7 +7,7 @@
         </h1>
     </section>
 
-    <section class="w-full sm:w-4/5 lg:w-3/5 mb-12">
+    <section class="w-full sm:w-4/5 lg:w-3/5 mb-12 px-4">
         <x-search.searchbar :errors="$errors"/>
     </section>
     <x-search.result :jobs="$jobs"/>
