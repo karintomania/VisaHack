@@ -13,7 +13,7 @@
     </section>
     <section class="w-full bg-base-light flex flex-col items-center py-16 mb-20 px-2">
         <h2 class="mb-10 font-bold text-grad text-2xl md:text-3xl ">Search Your Dream Job Now</h2>
-        <p class="text-md md:text-xl mb-10">There are <span class="text-main">{{$count}}</span> Jobs with sponsorship!</p>
+        <p class="text-md md:text-xl mb-10">There are <span class="text-gray-300 font-bold">{{$count}}</span> jobs with sponsorship available</p>
         <div class="w-full sm:w-4/5 lg:w-3/5 mb-12">
         <x-search.searchbar :errors="$errors"/>
         </div>
