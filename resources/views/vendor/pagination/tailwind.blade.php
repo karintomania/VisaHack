@@ -42,9 +42,38 @@
                             </svg>
                         </a>
                     @endif
+                    @php
+                        $trimmed = [];
+                        $side = 3;
+                        $current = $paginator->currentPage();
+
+                        $last= count($elements[0]);
+
+                        if ($current > $side + 1){
+                            $trimmed[] = [1 => $elements[0][1]];
+                        }
+                        if ($current > $side + 1){
+                            $trimmed[] = '...';
+                        }
+
+                        $middle = [];
+                        for ($i = max(1, $current - $side); $i <= min($last, $current + $side); $i ++) {
+                            $middle[$i] = $elements[0][$i];
+                        }
+                        $trimmed[] = $middle;
+
+                        if ($current < $last - $side - 1){
+                            $trimmed[] = '...';
+                        }
+
+                        if ($current < $last - $side){
+                            $trimmed[] = [$last => $elements[0][$last]];
+                        }
+
+                    @endphp
 
                     {{-- Pagination Elements --}}
-                    @foreach ($elements as $element)
+                    @foreach ($trimmed as $element)
                         {{-- "Three Dots" Separator --}}
                         @if (is_string($element))
                             <span aria-disabled="true">
