@@ -13,17 +13,17 @@
     <div class="mb-4 flex flex-row flex-wrap gap-2 sm:gap-4">
         @if ($job->salary)
         <div>
-            <span class="text-yellow-500 bg-opacity-20 bg-yellow-600 font-bold border border-yellow-600 px-2 py-1">{{$job->salary}}</span>
+            <span class="text-sm sm:text-md text-yellow-500 bg-opacity-20 bg-yellow-600 font-bold border border-yellow-600 px-2 py-1 whitespace-nowrap">{{$job->salary}}</span>
         </div>
         @endif
         <div>
-        <span class="text-lime-500 bg-opacity-20 bg-lime-600 font-bold border border-lime-600 px-2 py-1">
+        <span class="text-sm sm:text-md text-lime-500 bg-opacity-20 bg-lime-600 font-bold border border-lime-600 px-2 py-1  whitespace-nowrap">
             @if ($job->location){{$job->location}},&nbsp;@endif{{$job->country}}
         </span>
         </div>
         @if ($job->job_type) 
         <div>
-            <span class="text-sky-500 bg-opacity-20 bg-sky-600 font-bold border border-sky-600 px-2 py-1">{{$job->job_type}}</span>
+            <span class="text-sm sm:text-md text-sky-500 bg-opacity-20 bg-sky-600 font-bold border border-sky-600 px-2 py-1  whitespace-nowrap">{{$job->job_type}}</span>
         </div>
         @endif
     </div>
