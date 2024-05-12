@@ -9,7 +9,8 @@
             onClick='search.toggleDetail({{$job->id}})'>{{ $job->title }}</h2>
         <a class="hidden sm:inline btn-main px-4 py-2" href="{{$job->url}}" target="_blank">Apply</a>
     </div>
-    <div class="mb-2">Posted on {{substr($job->created_at, 0, 10)}} by {{$job->company}}</div>
+    <div class="mb-2">Posted  
+        {{ $job->created_at->diffInDays(now()) <= 7 ? $job->created_at->diffForHumans() : 'on ' . $job->created_at->toFormattedDateString() }} by {{$job->company}}</div>
     <div class="mb-4 flex flex-row flex-wrap gap-x-2 gap-y-4 sm:gap-4">
         @if ($job->salary)
         <div>
