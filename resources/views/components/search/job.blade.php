@@ -10,7 +10,7 @@
         <a class="hidden sm:inline btn-main px-4 py-2" href="{{$job->url}}" target="_blank">Apply</a>
     </div>
     <div class="mb-2">Posted on {{substr($job->created_at, 0, 10)}} by {{$job->company}}</div>
-    <div class="mb-4 flex flex-row flex-wrap gap-2 sm:gap-4">
+    <div class="mb-4 flex flex-row flex-wrap gap-x-2 gap-y-4 sm:gap-4">
         @if ($job->salary)
         <div>
             <span class="text-sm sm:text-md text-yellow-500 bg-opacity-20 bg-yellow-600 font-bold border border-yellow-600 px-2 py-1 whitespace-nowrap">{{$job->salary}}</span>
