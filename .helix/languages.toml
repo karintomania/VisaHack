@@ -12,3 +12,6 @@ args = [ "language-server" ]
 command = "psalm.phar"
 args = ["--language-server"]
 
+[[language]]
+name = "html"
+file-types = ["html", "blade.php"]
