@@ -4,7 +4,9 @@
 
 
 @layer base {
-  ul, ol {
+
+  ul,
+  ol {
     list-style: revert;
     list-style-position: inside;
   }
@@ -12,9 +14,9 @@
 
 @layer components {
   .btn-main {
-    @apply  bg-main text-onbase font-bold duration-500
-     hover:text-white hover:bg-secondary;
+    @apply bg-main text-onbase font-bold duration-500 hover:text-white hover:bg-secondary;
   }
+
   .text-grad {
     @apply text-transparent bg-clip-text bg-gradient-to-r from-main to-secondary
   }

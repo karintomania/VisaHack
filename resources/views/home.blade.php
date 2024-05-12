@@ -5,7 +5,9 @@
             <h1 class="text-2xl font-bold mb-4">
                 <div class="text-xl md:text-3xl text-gray-300 mb-2">Looking for</div>
                 <div class="text-3xl sm:text-4xl md:text-6xl text-grad
-                    ">A Tech Job Aborad?</div>
+                    ">
+                    A Tech Job Aborad?
+                </div>
             </h1>
             <p class="text-md sm:text-lg">VisaHack is a job board specialised to discover tech jobs complemented by visa sponsorship. Land your dream job in your dream country.</p>
         </div>
