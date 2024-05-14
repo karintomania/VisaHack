@@ -2,7 +2,7 @@
 name = "php"
 scope = "source.php"
 # language-servers = ["phpactor" ]
-language-servers = ["psalm","phpactor" ]
+language-servers = ["phpactor","psalm"]
 
 [language-server.phpactor]
 command = "phpactor"
