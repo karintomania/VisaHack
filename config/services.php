@@ -31,4 +31,10 @@ return [
         ],
     ],
 
+    'notion' => [
+        'base_url' => env('NOTION_BASE_URL'),
+        'api_key' => env('NOTION_API_KEY'),
+        'api_version' => env('NOTION_API_VERSIOIN'),
+    ],
+
 ];
