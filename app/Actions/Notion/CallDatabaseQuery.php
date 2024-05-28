@@ -3,38 +3,43 @@
 
 namespace App\Actions\Notion;
 
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 class CallDatabaseQuery
 {
+    public function __construct(
+        private readonly GetNotionRequestHeader $getNotionRequestHeader
+    ){}
 
-    public function __invoke()
+    public function __invoke(): string
     {
-        $url = config('services.notion.base_url')."/databases/a5dfa8ae-154e-4b26-a043-391a90cac6c6/query";
+        $url = config('services.notion.database_query_url');
 
-        $body = [
-            "filter" => [
-                "property" => "is_public",
-                "checkbox" => [
-                    "equals" => true
-                ]
-            ],
-            "sorts" => [
-                [
-                    "property" => "published_at",
-                    "direction" => "descending"
-                ]
-            ]
-        ];
-
-        $header = [
-            "Notion-Version" => config("services.notion.api_version"),
-            "Authorization" => sprintf("Bearer %s", config('services.notion.api_key')),
-        ];
+        $header = $this->getNotionRequestHeader->__invoke();
+        $body = $this->getRequestBody();
 
         $response = Http::withHeaders($header)->post($url, $body);
 
-        return $response;
+        return $response->body();
+    }
+
+    private function getRequestBody(): array
+    {
+        return [
+                    "filter" => [
+                        "property" => "is_public",
+                        "checkbox" => [
+                            "equals" => true
+                        ]
+                    ],
+                    "sorts" => [
+                        [
+                            "property" => "published_at",
+                            "direction" => "descending"
+                        ]
+                    ]
+                ];
     }
     
 }

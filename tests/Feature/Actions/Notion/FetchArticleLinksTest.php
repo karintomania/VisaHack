@@ -3,6 +3,7 @@
 namespace Tests\Feature\Actions\Notion;
 
 use App\Actions\Notion\{CallDatabaseQuery, FetchArticleLinks};
+use App\Repository\Notion\ArticleLinkCache;
 use Tests\TestCase;
 use Mockery;
 use Mockery\MockInterface;
@@ -15,13 +16,21 @@ class FetchArticleLinksTest extends TestCase
         $callDbMock = Mockery::mock(
             CallDatabaseQuery::class, function (MockInterface $mock) {
                 $json = file_get_contents(dirname(__FILE__) . "/article_links.json");
-
                 $mock->shouldReceive('__invoke')
-                   ->andReturn(json_decode($json, true));
+                   ->andReturn($json);
             }
         );
 
-        $fetch = new FetchArticleLinks($callDbMock);
+        $articleLinkCacheMock = Mockery::mock(
+            ArticleLinkCache::class, function (MockInterface $mock) {
+                $mock->shouldReceive('has')
+                   ->andReturn(false);
+                $mock->shouldReceive('store');
+            }
+        );
+
+
+        $fetch = new FetchArticleLinks($callDbMock, $articleLinkCacheMock);
         $result = $fetch();
 
         $this->assertEquals(2, count($result));
