@@ -4,13 +4,10 @@ namespace Tests\Feature\Repository\Notion;
 
 use App\Models\Notion\Slug;
 use App\Repository\Notion\ArticleSlugCache;
-use Illuminate\Support\Facades\Cache;
-use App\Repository\Notion\ArticleLinkCache;
 use Tests\TestCase;
 
 class ArticleSlugCacheTest extends TestCase
 {
-
     /**
      * A basic test example.
      */
@@ -28,14 +25,11 @@ class ArticleSlugCacheTest extends TestCase
         $cache->store($slug);
 
         $this->assertTrue($cache->has($slugStr));
-        
+
         $cachedSlug = $cache->get($slugStr);
 
         $this->assertEquals($slug->slug, $cachedSlug->slug);
         $this->assertEquals($slug->pageId, $cachedSlug->pageId);
 
-
     }
-
-    
 }

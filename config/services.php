@@ -37,7 +37,7 @@ return [
         'api_version' => env('NOTION_API_VERSIOIN'),
         'database_id' => env('NOTION_DATABASE_ID'),
         'database_query_url' => sprintf(
-            "%s/databases/%s/query",
+            '%s/databases/%s/query',
             env('NOTION_BASE_URL'),
             env('NOTION_DATABASE_ID'),
         ),

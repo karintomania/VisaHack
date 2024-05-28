@@ -2,17 +2,15 @@
 
 namespace Tests\Feature\Repository;
 
-use Illuminate\Support\Facades\Cache;
 use App\Repository\Notion\ArticleLinkCache;
 use Tests\TestCase;
 
 class ArticleLinkCacheTest extends TestCase
 {
-
     public function test_ArticleLinkCache_stores_and_gets(): void
     {
-        
-        $json = <<<JSON
+
+        $json = <<<'JSON'
         {
             "test": "test value"
         }
@@ -26,8 +24,8 @@ class ArticleLinkCacheTest extends TestCase
         $cache->store($json);
 
         $this->assertTrue($cache->has($page));
-        
-        $cachedJson= $cache->get($page);
+
+        $cachedJson = $cache->get($page);
 
         $this->assertEquals($json, $cachedJson);
     }

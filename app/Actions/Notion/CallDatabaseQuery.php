@@ -1,16 +1,15 @@
 <?php
 
-
 namespace App\Actions\Notion;
 
-use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 class CallDatabaseQuery
 {
     public function __construct(
         private readonly GetNotionRequestHeader $getNotionRequestHeader
-    ){}
+    ) {
+    }
 
     public function __invoke(): string
     {
@@ -27,19 +26,18 @@ class CallDatabaseQuery
     private function getRequestBody(): array
     {
         return [
-                    "filter" => [
-                        "property" => "is_public",
-                        "checkbox" => [
-                            "equals" => true
-                        ]
-                    ],
-                    "sorts" => [
-                        [
-                            "property" => "published_at",
-                            "direction" => "descending"
-                        ]
-                    ]
-                ];
+            'filter' => [
+                'property' => 'is_public',
+                'checkbox' => [
+                    'equals' => true,
+                ],
+            ],
+            'sorts' => [
+                [
+                    'property' => 'published_at',
+                    'direction' => 'descending',
+                ],
+            ],
+        ];
     }
-    
 }
