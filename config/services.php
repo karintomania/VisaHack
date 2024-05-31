@@ -41,6 +41,7 @@ return [
             env('NOTION_BASE_URL'),
             env('NOTION_DATABASE_ID'),
         ),
+        'get_page_url' => env('NOTION_BASE_URL')."/blocks/%s/children",
     ],
 
 ];
