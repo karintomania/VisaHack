@@ -17,4 +17,12 @@ class BlogController extends Controller
 
         return view('blogs', ['links' => $articleLinks]);
     }
+
+    public function article(string $slug)
+    {
+        $articleLinks = $this->fetchArticleLinks->__invoke();
+
+        return view('blogs', ['links' => $articleLinks]);
+    }
+
 }
