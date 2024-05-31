@@ -5,6 +5,7 @@ namespace Tests\Feature\Actions\Notion;
 use App\Actions\Notion\CallDatabaseQuery;
 use App\Actions\Notion\FetchArticleLinks;
 use App\Repository\Notion\ArticleLinkCache;
+use App\Repository\Notion\ArticleSlugCache;
 use Mockery;
 use Mockery\MockInterface;
 use Tests\TestCase;
@@ -30,7 +31,14 @@ class FetchArticleLinksTest extends TestCase
             }
         );
 
-        $fetch = new FetchArticleLinks($callDbMock, $articleLinkCacheMock);
+        $articleSlugCacheMock = Mockery::mock(
+            ArticleSlugCache::class, function (MockInterface $mock) {
+                $mock->shouldReceive('has')
+                    ->andReturn(true);
+            }
+        );
+
+        $fetch = new FetchArticleLinks($callDbMock, $articleLinkCacheMock, $articleSlugCacheMock);
         $result = $fetch();
 
         $this->assertEquals(2, count($result));
