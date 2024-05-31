@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Notion\FetchArticle;
 use App\Actions\Notion\FetchArticleLinks;
 
 class BlogController extends Controller
 {
     public function __construct(
-        private FetchArticleLinks $fetchArticleLinks
+        private FetchArticleLinks $fetchArticleLinks,
+        private FetchArticle $fetchArticle,
     ) {
     }
 
@@ -15,14 +17,13 @@ class BlogController extends Controller
     {
         $articleLinks = $this->fetchArticleLinks->__invoke();
 
-        return view('blogs', ['links' => $articleLinks]);
+        return view('blog/links', ['links' => $articleLinks]);
     }
 
     public function article(string $slug)
     {
-        $articleLinks = $this->fetchArticleLinks->__invoke();
+        $html = $this->fetchArticle->__invoke($slug);
 
-        return view('blogs', ['links' => $articleLinks]);
+        return view('blog/article', ['html' => $html]);
     }
-
 }
