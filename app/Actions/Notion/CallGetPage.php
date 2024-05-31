@@ -17,12 +17,12 @@ class CallGetPage
 
         $header = $this->getNotionRequestHeader->__invoke();
 
-        // $response = Http::withHeaders($header)->get($url);
-        // return $response->body();
+        $response = Http::withHeaders($header)->get($url);
 
-        $json = file_get_contents('/var/www/html/tests/Feature/Actions/Notion/convert_page_test.json');
+        return $response->body();
 
-        return $json;
+        // $json = file_get_contents("/var/www/html/tests/Feature/Actions/Notion/convert_page_test.json");
+        // return $json;
 
     }
 }

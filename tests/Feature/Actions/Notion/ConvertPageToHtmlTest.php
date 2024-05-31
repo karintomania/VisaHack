@@ -5,12 +5,12 @@ namespace Tests\Feature\Actions\Notion;
 use App\Actions\Notion\ConvertPageToHtml;
 use Tests\TestCase;
 
-class ConvertPageToHtmlTest extends TestCase{
-
+class ConvertPageToHtmlTest extends TestCase
+{
     public function test_convert_converts(): void
     {
 
-        $expected = <<<HTML
+        $expected = <<<'HTML'
         <h1>How to write a test Blog using Notion</h1>
         <p>This is a test article. Let’s try not to use blocks for multiple lines.
         I can use Shift + Enter for that.</p>
@@ -38,7 +38,4 @@ class ConvertPageToHtmlTest extends TestCase{
 
         $this->assertEquals($expected, $result);
     }
-
-    
-    
 }

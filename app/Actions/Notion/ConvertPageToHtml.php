@@ -39,7 +39,7 @@ class ConvertPageToHtml
             ? $this->handleNumberedListItem($block)
             : $this->handleBulletedListItem($block);
 
-        $html .= $content . "\n";
+        $html .= $content."\n";
 
         return [$html, $openingList];
     }
@@ -60,7 +60,7 @@ class ConvertPageToHtml
             'image' => $this->handleImage($block),
             default => 'defalut'
         };
-        $html .= $content . "\n";
+        $html .= $content."\n";
 
         return [$html, $openingList];
     }
