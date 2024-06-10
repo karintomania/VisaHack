@@ -23,20 +23,23 @@
 }
 
 .blog-article {
+
+  @apply text-xl;
+
   h1 {
-    @apply text-5xl text-main mb-8
+    @apply text-4xl font-bold text-main my-8
   }
 
   h2 {
-    @apply text-3xl text-gray-300 my-4
+    @apply text-2xl sm:text-3xl font-bold text-gray-300 mt-6 sm:mt-10 mb-5 sm:mb-8
   }
 
   h3 {
-    @apply text-xl text-gray-300 my-4
+    @apply text-lg text-xl font-bold text-gray-300 mt-6 sm:mt-8 mb-4 sm:mb-6
   }
 
   img {
-    @apply w-1/2 self-center my-4
+    @apply w-full md:w-2/3 self-center mb-4
   }
 
   u {
@@ -47,11 +50,11 @@
     @apply text-secondary underline
   }
 
-  ol {
-    @apply my-4
+  ol, ul {
+    @apply mb-4
   }
 
-  ul {
-    @apply my-4
+  p {
+    @apply mb-4
   }
 }
