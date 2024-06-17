@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Notion; 
+namespace App\Actions\Notion\GetArticle; 
 
 use \Exception;
 

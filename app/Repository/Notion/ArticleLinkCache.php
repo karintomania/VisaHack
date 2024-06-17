@@ -2,6 +2,7 @@
 
 namespace App\Repository\Notion;
 
+use App\Models\Notion\ArticleLink;
 use Illuminate\Support\Facades\Cache;
 
 class ArticleLinkCache
@@ -18,7 +19,11 @@ class ArticleLinkCache
         return $has;
     }
 
-    public function get(int $page = 1): string
+    /**
+     * @param int $page
+     * @return ArticleLink[] $links
+     */
+    public function get(int $page = 1): array
     {
         $key = $this->getKey($page);
         $json = Cache::get($key);
@@ -26,7 +31,11 @@ class ArticleLinkCache
         return $json;
     }
 
-    public function store(string $json, int $page = 1): void
+    /**
+     * @param ArticleLink[] $links
+     * @param int $page
+     */
+    public function store(array $links, int $page = 1): void
     {
         $key = $this->getKey($page);
         Cache::put($key, $json, self::LIFETIME_SECONDS);

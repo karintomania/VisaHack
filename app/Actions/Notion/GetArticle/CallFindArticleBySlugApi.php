@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Actions\Notion;
+namespace App\Actions\Notion\GetArticle;
 
+use App\Actions\Notion\GetNotionRequestHeader;
 use Illuminate\Support\Facades\Http;
 
-class CallGetPageBySlug
+class CallFindArticleBySlugApi
 {
     public function __construct(
-        private readonly GetNotionRequestHeader $getNotionRequestHeader
+        readonly private GetNotionRequestHeader $getNotionRequestHeader
     ) {
     }
 

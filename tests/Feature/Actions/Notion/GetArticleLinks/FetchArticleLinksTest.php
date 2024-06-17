@@ -1,9 +1,10 @@
 <?php
 
-namespace Tests\Feature\Actions\Notion;
+namespace Tests\Feature\Actions\Notion\GetArticleLinks;
 
-use App\Actions\Notion\CallDatabaseQuery;
-use App\Actions\Notion\FetchArticleLinks;
+use App\Actions\Notion\GetArticleLinks\CallArticleLinksApi;
+use App\Actions\Notion\GetArticleLinks\FetchArticleLinks;
+use App\Models\Notion\ArticleLink;
 use App\Repository\Notion\ArticleLinkCache;
 use App\Repository\Notion\ArticleSlugCache;
 use Mockery;
@@ -12,14 +13,14 @@ use Tests\TestCase;
 
 class FetchArticleLinksTest extends TestCase
 {
-    public function test_invoke_returns_database(): void
+    public function test_invoke_returns_links_from_api_when_no_cache(): void
     {
 
         $callDbMock = Mockery::mock(
-            CallDatabaseQuery::class, function (MockInterface $mock) {
-                $json = file_get_contents(dirname(__FILE__).'/article_links.json');
+            CallArticleLinksApi::class, function (MockInterface $mock) {
+                $links = $this->generateTestLinks();
                 $mock->shouldReceive('__invoke')
-                    ->andReturn($json);
+                    ->andReturn($links);
             }
         );
 
@@ -31,12 +32,7 @@ class FetchArticleLinksTest extends TestCase
             }
         );
 
-        $articleSlugCacheMock = Mockery::mock(
-            ArticleSlugCache::class, function (MockInterface $mock) {
-                $mock->shouldReceive('has')
-                    ->andReturn(true);
-            }
-        );
+        $articleSlugCacheMock = Mockery::mock(ArticleSlugCache::class);
 
         $fetch = new FetchArticleLinks($callDbMock, $articleLinkCacheMock, $articleSlugCacheMock);
         $result = $fetch();
@@ -54,5 +50,24 @@ class FetchArticleLinksTest extends TestCase
         $this->assertEquals('Test Article 2', $result[1]->title);
         $this->assertEquals('http://localhost/blogs/test-article-2', $result[1]->url);
         $this->assertEquals('2024-05-14', $result[1]->publishedAt->format('Y-m-d'));
+    }
+
+
+    /**
+     * @return ArticleLink[]
+     */
+    private function generateTestLinks(): array
+    {
+        $json = file_get_contents(dirname(__FILE__).'/article_links.json');
+
+        $jsonData = json_decode($json, true);
+
+        $links = array_map(
+            fn ($articleData) => ArticleLink::fromJsonData($articleData),
+            $jsonData['results']
+        );
+
+        return $links;
+
     }
 }

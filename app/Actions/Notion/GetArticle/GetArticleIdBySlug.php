@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Actions\Notion;
+namespace App\Actions\Notion\GetArticle;
 
 use App\Repository\Notion\ArticleSlugCache;
 
-class GetPageIdBySlug{
+class GetArticleIdBySlug{
 
     public function __construct(
         private ArticleSlugCache $cache,
-        private CallGetPageBySlug $callGetPageBySlug,
+        private CallGetArticleBySlug $callGetArticleBySlug,
     ){}
 
 
@@ -23,7 +23,7 @@ class GetPageIdBySlug{
             $pageId = $slug->pageId;
 
         } else {
-            $json = $this->callGetPageBySlug->__invoke($slugStr);
+            $json = $this->callGetArticleBySlug->__invoke($slugStr);
 
             $data = json_decode($json, true);
 
