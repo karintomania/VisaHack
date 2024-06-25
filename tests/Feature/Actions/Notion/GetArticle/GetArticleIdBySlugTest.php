@@ -1,26 +1,24 @@
 <?php
 
-namespace Tests\Feature\Actions\Notion;
+namespace Tests\Feature\Actions\Notion\GetArticle;
 
-use App\Actions\Notion\CallGetPage;
-use App\Actions\Notion\CallGetPageBySlug;
-use App\Actions\Notion\ConvertPageToHtml;
-use App\Actions\Notion\FetchArticle;
-use App\Actions\Notion\GetPageIdBySlug;
-use App\Actions\Notion\NoSuchSlugExistsException;
+use App\Actions\Notion\GetArticle\CallFindArticleBySlugApi;
+use App\Actions\Notion\GetArticle\GetArticleIdBySlug;
+use App\Actions\Notion\GetArticle\NoSuchSlugExistsException;
 use App\Models\Notion\Slug;
 use App\Repository\Notion\ArticleSlugCache;
 use Mockery;
 use Mockery\MockInterface;
 use Tests\TestCase;
 
-class GetPageIdBySlugTest extends TestCase
+class GetArticleIdBySlugTest extends TestCase
 {
     public function test_invoke_returns_page_id_from_cache(): void
     {
-        $slugStr = "test-slug";
-        $pageId = "testId";
+        $slugStr = 'test-slug';
+        $pageId = 'testId';
 
+        // mock cache
         $articleSlugCacheMock = Mockery::mock(
             ArticleSlugCache::class,
             function (MockInterface $mock) use ($slugStr, $pageId) {
@@ -34,23 +32,24 @@ class GetPageIdBySlugTest extends TestCase
             }
         );
 
-        $getPageMock = Mockery::mock(CallGetPageBySlug::class);
+        // mock API, but this won't be used
+        $getPageMock = Mockery::mock(CallFindArticleBySlugApi::class);
 
-
-        $fetch = new GetPageIdBySlug(
-            $articleSlugCacheMock, $getPageMock, 
+        $getArticleIdBySlug = new GetArticleIdBySlug(
+            $articleSlugCacheMock, $getPageMock,
         );
 
-        $result = $fetch($slugStr);
+        $result = $getArticleIdBySlug->__invoke($slugStr);
 
         $this->assertEquals($pageId, $result);
     }
 
-    public function test_invoke_returns_page_id_by_calling_CallGetPageBySlug(): void
+    public function test_invoke_returns_page_id_by_calling_CallFindArticleBySlugApi(): void
     {
-        $slugStr = "test-slug";
-        $pageId = "testId";
+        $slugStr = 'test-slug';
+        $pageId = 'testId';
 
+        // mock no cache
         $articleSlugCacheMock = Mockery::mock(
             ArticleSlugCache::class,
             function (MockInterface $mock) use ($slugStr, $pageId) {
@@ -61,8 +60,9 @@ class GetPageIdBySlugTest extends TestCase
             }
         );
 
+        // mock API respponse
         $getPageMock = Mockery::mock(
-            CallGetPageBySlug::class, function (MockInterface $mock) use ($pageId) {
+            CallFindArticleBySlugApi::class, function (MockInterface $mock) use ($pageId) {
                 $json = <<<JSON
                     {
                         "results": [
@@ -76,21 +76,21 @@ class GetPageIdBySlugTest extends TestCase
             }
         );
 
-
-        $fetch = new GetPageIdBySlug(
-            $articleSlugCacheMock, $getPageMock, 
+        $getArticleIdBySlug = new GetArticleIdBySlug(
+            $articleSlugCacheMock, $getPageMock,
         );
 
-        $result = $fetch($slugStr);
+        $result = $getArticleIdBySlug->__invoke($slugStr);
 
         $this->assertEquals($pageId, $result);
     }
 
     public function test_invoke_returns_exception_if_slug_doesnt_exist(): void
     {
-        $slugStr = "test-slug";
-        $pageId = "testId";
+        $slugStr = 'test-slug';
+        $pageId = 'testId';
 
+        // no cache
         $articleSlugCacheMock = Mockery::mock(
             ArticleSlugCache::class,
             function (MockInterface $mock) use ($slugStr, $pageId) {
@@ -101,10 +101,10 @@ class GetPageIdBySlugTest extends TestCase
             }
         );
 
+        // mock API returns no resluts
         $getPageMock = Mockery::mock(
-            // API returns no resluts
-            CallGetPageBySlug::class, function (MockInterface $mock) use ($pageId) {
-                $json = <<<JSON
+            CallFindArticleBySlugApi::class, function (MockInterface $mock) {
+                $json = <<<'JSON'
                     { "results": [] }
                 JSON;
 
@@ -113,14 +113,14 @@ class GetPageIdBySlugTest extends TestCase
             }
         );
 
-
-        $fetch = new GetPageIdBySlug(
-            $articleSlugCacheMock, $getPageMock, 
+        $getArticleIdBySlug = new GetArticleIdBySlug(
+            $articleSlugCacheMock, $getPageMock,
         );
 
+        // assert exception
         $this->expectException(NoSuchSlugExistsException::class);
         $this->expectExceptionMessage("The specified blog: {$slugStr} doesn't exist.");
-        $result = $fetch($slugStr);
+        $result = $getArticleIdBySlug->__invoke($slugStr);
 
     }
 }

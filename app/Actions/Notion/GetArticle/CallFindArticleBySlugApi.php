@@ -26,6 +26,7 @@ class CallFindArticleBySlugApi
 
     private function getRequestBody(string $slug): array
     {
+        // request body to find a page by slug
         return [
             'filter' => [
                 'and' => [
@@ -33,13 +34,13 @@ class CallFindArticleBySlugApi
                         'property' => 'is_public',
                         'checkbox' => [
                             'equals' => true,
-                        ]
+                        ],
                     ],
                     [
                         'property' => 'slug',
                         'rich_text' => [
                             'equals' => $slug,
-                        ]
+                        ],
                     ],
                 ],
             ],
