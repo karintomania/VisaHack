@@ -2,16 +2,10 @@
 
 namespace Tests\Feature\Actions\Notion;
 
-use App\Actions\Notion\CallDatabaseQuery;
-use App\Actions\Notion\CallGetPage;
-use App\Actions\Notion\CallGetPageBySlug;
-use App\Actions\Notion\ConvertPageToHtml;
-use App\Actions\Notion\FetchArticle;
-use App\Actions\Notion\FetchArticleLinks;
-use App\Actions\Notion\GetPageIdBySlug;
-use App\Models\Notion\Slug;
-use App\Repository\Notion\ArticleLinkCache;
-use App\Repository\Notion\ArticleSlugCache;
+use App\Actions\Notion\GetArticle\CallArticleApi;
+use App\Actions\Notion\GetArticle\ConvertPageToHtml;
+use App\Actions\Notion\GetArticle\FetchArticle;
+use App\Actions\Notion\GetArticle\GetArticleIdBySlug;
 use Mockery;
 use Mockery\MockInterface;
 use Tests\TestCase;
@@ -20,21 +14,20 @@ class FetchArticleTest extends TestCase
 {
     public function test_invoke_returns_page(): void
     {
-        $slugStr = "test-slug";
-        $pageId = "testId";
+        $slugStr = 'test-slug';
+        $pageId = 'testId';
 
-        $getPageIdBySlugMock = Mockery::mock(
-            GetPageIdBySlug::class,
+        $getArticleIdBySlugMock = Mockery::mock(
+            GetArticleIdBySlug::class,
             function (MockInterface $mock) use ($slugStr, $pageId) {
-                $slug = new Slug($slugStr, $pageId);
                 $mock->shouldReceive('__invoke')
                     ->with($slugStr)
                     ->andReturn($pageId);
             }
         );
 
-        $getPageMock = Mockery::mock(
-            CallGetPage::class, function (MockInterface $mock) use ($pageId) {
+        $callArticleApiMock = Mockery::mock(
+            CallArticleApi::class, function (MockInterface $mock) use ($pageId) {
                 $json = file_get_contents(dirname(__FILE__).'/convert_page_test.json');
                 $mock->shouldReceive('__invoke')
                     ->with($pageId)
@@ -42,10 +35,9 @@ class FetchArticleTest extends TestCase
             }
         );
 
-
         $fetch = new FetchArticle(
-            $getPageIdBySlugMock,
-            $getPageMock,
+            $getArticleIdBySlugMock,
+            $callArticleApiMock,
             app()->make(ConvertPageToHtml::class),
         );
 

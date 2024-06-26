@@ -4,7 +4,7 @@ namespace App\Actions\Notion\GetArticle;
 
 class ConvertPageToHtml
 {
-    public function convert(string $json): string
+    public function __invoke(string $json): string
     {
 
         $data = json_decode($json, true)['results'];

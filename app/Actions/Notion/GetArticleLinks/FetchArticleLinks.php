@@ -3,7 +3,6 @@
 namespace App\Actions\Notion\GetArticleLinks;
 
 use App\Models\Notion\ArticleLink;
-use App\Models\Notion\Slug;
 use App\Repository\Notion\ArticleLinkCache;
 use App\Repository\Notion\ArticleSlugCache;
 
@@ -35,5 +34,4 @@ class FetchArticleLinks
 
         return $links;
     }
-
 }

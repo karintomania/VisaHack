@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Notion\FetchArticle;
-use App\Actions\Notion\FetchArticleLinks;
+use App\Actions\Notion\GetArticle\FetchArticle;
+use App\Actions\Notion\GetArticleLinks\FetchArticleLinks;
 
 class BlogController extends Controller
 {
     public function __construct(
-        private FetchArticleLinks $fetchArticleLinks,
-        private FetchArticle $fetchArticle,
+        readonly private FetchArticleLinks $fetchArticleLinks,
+        readonly private FetchArticle $fetchArticle,
     ) {
     }
 

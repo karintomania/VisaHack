@@ -54,9 +54,17 @@ class GetArticleIdBySlugTest extends TestCase
             ArticleSlugCache::class,
             function (MockInterface $mock) use ($slugStr, $pageId) {
                 $slug = new Slug($slugStr, $pageId);
+
+                // assert cache check
                 $mock->shouldReceive('has')
                     ->with($slugStr)
                     ->andReturn(false);
+
+                // assert cache storing
+                $mock->shouldReceive('store')
+                    ->withArgs(
+                        fn (Slug $slug) => $slug->pageId === $pageId && $slug->slug === $slugStr
+                    );
             }
         );
 

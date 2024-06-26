@@ -52,7 +52,6 @@ class FetchArticleLinksTest extends TestCase
         $this->assertEquals('2024-05-14', $result[1]->publishedAt->format('Y-m-d'));
     }
 
-
     /**
      * @return ArticleLink[]
      */

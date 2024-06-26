@@ -2,24 +2,22 @@
 
 namespace App\Actions\Notion\GetArticle;
 
-
 class FetchArticle
 {
     public function __construct(
         readonly private GetArticleIdBySlug $getArticleIdBySlug,
-        readonly private CallGetArticle $getArticle,
-        readonly private ConvertArticleToHtml $converter,
+        readonly private CallArticleApi $getArticle,
+        readonly private ConvertPageToHtml $convert,
     ) {
     }
 
     public function __invoke(string $slugStr): string
     {
 
-        $pageId = $this->getPageIdBySlug->__invoke($slugStr);
-        $json = $this->getPage->__invoke($pageId);
-        $html = $this->converter->convert($json);
+        $pageId = $this->getArticleIdBySlug->__invoke($slugStr);
+        $json = $this->getArticle->__invoke($pageId);
+        $html = $this->convert->__invoke($json);
 
         return $html;
     }
-
 }

@@ -14,7 +14,7 @@ class CallArticleLinksApi
     ) {
     }
 
-    /** 
+    /**
      * @return ArticleLink[]
      */
     public function __invoke(): array
@@ -29,17 +29,17 @@ class CallArticleLinksApi
 
         $links = $this->convertJson($json);
 
-        ArticleLinksRetrieved::dispatchIf(!empty($links), $links, $json);
-        
+        ArticleLinksRetrieved::dispatchIf(! empty($links), $links, $json);
+
         return $links;
     }
 
-    /** 
+    /**
      * @return ArticleLink[]
      */
     private function convertJson(string $json): array
     {
-        
+
         $jsonData = json_decode($json, true);
 
         $links = array_map(

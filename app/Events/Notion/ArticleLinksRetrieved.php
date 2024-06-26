@@ -3,11 +3,8 @@
 namespace App\Events\Notion;
 
 use App\Models\Notion\ArticleLink;
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
@@ -16,14 +13,14 @@ class ArticleLinksRetrieved
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * @param ArticleLink[] $links
-     * @param int $page
+     * @param  ArticleLink[]  $links
      */
     public function __construct(
         public array $links,
         public string $json,
         public int $page = 1,
-    ) {}
+    ) {
+    }
 
     /**
      * Get the channels the event should broadcast on.

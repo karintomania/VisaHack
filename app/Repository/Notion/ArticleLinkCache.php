@@ -20,7 +20,6 @@ class ArticleLinkCache
     }
 
     /**
-     * @param int $page
      * @return ArticleLink[] $links
      */
     public function get(int $page = 1): array
@@ -32,13 +31,12 @@ class ArticleLinkCache
     }
 
     /**
-     * @param ArticleLink[] $links
-     * @param int $page
+     * @param  ArticleLink[]  $links
      */
     public function store(array $links, int $page = 1): void
     {
         $key = $this->getKey($page);
-        Cache::put($key, $json, self::LIFETIME_SECONDS);
+        Cache::put($key, $links, self::LIFETIME_SECONDS);
 
     }
 

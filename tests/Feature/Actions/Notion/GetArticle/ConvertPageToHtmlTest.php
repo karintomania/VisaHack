@@ -34,7 +34,7 @@ class ConvertPageToHtmlTest extends TestCase
 
         $json = file_get_contents(dirname(__FILE__).'/convert_page_test.json');
 
-        $result = $converter->convert($json);
+        $result = $converter->__invoke($json);
 
         $this->assertEquals($expected, $result);
     }
