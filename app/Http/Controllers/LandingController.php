@@ -9,6 +9,7 @@ class LandingController extends Controller
     public function __invoke()
     {
         $count = JobPost::active()->count();
-        return view('home', ["count" => $count]);
+
+        return view('home', ['count' => $count]);
     }
 }

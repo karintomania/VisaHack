@@ -21,3 +21,40 @@
     @apply text-transparent bg-clip-text bg-gradient-to-r from-main to-secondary
   }
 }
+
+.blog-article {
+
+  @apply text-xl;
+
+  h1 {
+    @apply text-4xl font-bold text-main my-8
+  }
+
+  h2 {
+    @apply text-2xl sm:text-3xl font-bold text-gray-300 mt-6 sm:mt-10 mb-5 sm:mb-8
+  }
+
+  h3 {
+    @apply text-lg text-xl font-bold text-gray-300 mt-6 sm:mt-8 mb-4 sm:mb-6
+  }
+
+  img {
+    @apply w-full md:w-2/3 self-center mb-4
+  }
+
+  u {
+    @apply text-main
+  }
+
+  a {
+    @apply text-secondary underline
+  }
+
+  ol, ul {
+    @apply mb-4
+  }
+
+  p {
+    @apply mb-4
+  }
+}
