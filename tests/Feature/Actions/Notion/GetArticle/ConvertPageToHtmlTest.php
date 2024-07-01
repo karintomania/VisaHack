@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Actions\Notion;
 
-use App\Actions\Notion\ConvertPageToHtml;
+use App\Actions\Notion\GetArticle\ConvertPageToHtml;
 use Tests\TestCase;
 
 class ConvertPageToHtmlTest extends TestCase
