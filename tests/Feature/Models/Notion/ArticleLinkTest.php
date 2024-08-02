@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Models\Notion;
+namespace Tests\Feature\Models\Notion;
 
 use App\Models\Notion\ArticleLink;
 use Tests\TestCase;
