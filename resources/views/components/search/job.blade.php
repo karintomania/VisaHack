@@ -5,12 +5,12 @@
 
 <div class="w-full bg-base-light px-6 py-4 border border-gray-700">
     <div class="flex flex-row justify-between items-start gap-4">
-        <div class="flex flex-row">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center w-full gap-2">
             <h2
                 class="text-2xl text-gray-300 font-bold underline cursor-pointer"
                 onClick='search.toggleDetail({{$job->id}})'>{{ $job->title }}</h2>
-            <a class="text-md" href="{{ url("/jobs/{$job->id}") }}" target="_blank">
-                &nbsp;🔗
+            <a class="flex-shrink-0" href="{{ url("/jobs/{$job->id}") }}" target="_blank">
+                <img class="w-full h-4 w-4 sm:h-4 sm:w-4 fill-blue-500" src="{{ asset('/images/icons/open.svg') }}"/>
             </a>
         </div>
         <a class="hidden sm:inline btn-main px-4 py-2" href="{{$job->url}}" target="_blank">Apply</a>
