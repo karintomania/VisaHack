@@ -1,12 +1,18 @@
 @props([
     'job',
+    'expand' => false
 ])
 
 <div class="w-full bg-base-light px-6 py-4 border border-gray-700">
     <div class="flex flex-row justify-between items-start gap-4">
-        <h2 
-            class="text-2xl text-gray-300 font-bold underline cursor-pointer"
-            onClick='search.toggleDetail({{$job->id}})'>{{ $job->title }}</h2>
+        <div class="flex flex-col sm:flex-row items-start sm:items-center w-full gap-2">
+            <h2
+                class="text-2xl text-gray-300 font-bold underline cursor-pointer"
+                onClick='search.toggleDetail({{$job->id}})'>{{ $job->title }}</h2>
+            <a class="flex-shrink-0" href="{{ url("/jobs/{$job->id}") }}" target="_blank">
+                <img class="w-full h-4 w-4 sm:h-4 sm:w-4 fill-blue-500" src="{{ asset('/images/icons/open.svg') }}"/>
+            </a>
+        </div>
         <a class="hidden sm:inline btn-main px-4 py-2" href="{{$job->url}}" target="_blank">Apply</a>
     </div>
     <div class="mb-2">Posted  
@@ -28,11 +34,11 @@
         </div>
         @endif
     </div>
-    <div id="job_summary_{{$job->id}}" class="mb-4">
+    <div id="job_summary_{{$job->id}}" class="mb-4 @if($expand) hidden @endif">
         <p>{{substr($job->getPlainDescription(), 0, 400)}}...</p>
         <div onClick='search.toggleDetail({{$job->id}})' class="underline text-lg cursor-pointer">Read more...</div>
     </div>
-    <div id="job_detail_{{$job->id}}" class="hidden mb-4 list-disc">
+    <div id="job_detail_{{$job->id}}" class="@if(!$expand) hidden @endif mb-4 list-disc">
         <div onClick='search.toggleDetail({{$job->id}})' 
             class="underline mb-4 text-lg cursor-pointer">Read less...</div>
         <p>{!!$job->description!!}</p>

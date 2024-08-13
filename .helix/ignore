@@ -1,0 +1,4 @@
+!.helix
+!storage/logs/*
+!.env
+!logs/apache2/*.log

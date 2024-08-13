@@ -4,8 +4,8 @@ namespace Tests\Feature\Repository\Notion;
 
 use App\Models\Notion\ArticleLink;
 use App\Repository\Notion\ArticleLinkCache;
-use Tests\TestCase;
 use Carbon\CarbonImmutable;
+use Tests\TestCase;
 
 class ArticleLinkCacheTest extends TestCase
 {
@@ -14,21 +14,20 @@ class ArticleLinkCacheTest extends TestCase
 
         // create mock articles
         $article1 = new ArticleLink(
-            id: "id-1",
-            excerpt: "This is excerpt 1.",
-            title: "Test Blog 1",
-            url: "http://example.com/blog-1",
-            publishedAt: CarbonImmutable::createFromFormat(DATE_ATOM, "2024-07-01T00:00:00+00:00")
+            id: 'id-1',
+            excerpt: 'This is excerpt 1.',
+            title: 'Test Blog 1',
+            url: 'http://example.com/blog-1',
+            publishedAt: CarbonImmutable::createFromFormat(DATE_ATOM, '2024-07-01T00:00:00+00:00')
         );
 
         $article2 = new ArticleLink(
-            id: "id-2",
-            excerpt: "This is excerpt 2.",
-            title: "Test Blog 2",
-            url: "http://example.com/blog-2",
-            publishedAt: CarbonImmutable::createFromFormat(DATE_ATOM, "2024-07-02T00:00:00+00:00")
+            id: 'id-2',
+            excerpt: 'This is excerpt 2.',
+            title: 'Test Blog 2',
+            url: 'http://example.com/blog-2',
+            publishedAt: CarbonImmutable::createFromFormat(DATE_ATOM, '2024-07-02T00:00:00+00:00')
         );
-    
 
         $cache = new ArticleLinkCache();
         $page = 1;
