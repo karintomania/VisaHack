@@ -3,11 +3,14 @@ services:
     container_name: visahack_web
     build:
       context: .
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
     restart: always
     volumes:
       - "./:/var/www/html/"
       - "./container_resource/php/xdebug-local.ini:/usr/local/etc/php/conf.d/xdebug-local.ini"
-      - "./logs/apache2:/var/log/apache2/"
+      # - "./logs/apache2:/var/log/apache2/"
       - "./container_resource/apache2/000-default.conf:/etc/apache2/sites-available/000-default.conf"
     ports:
       - "8000:80"
