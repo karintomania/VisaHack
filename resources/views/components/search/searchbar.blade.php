@@ -5,12 +5,14 @@
 <div class="w-full text-gray-400">
     <!-- search box -->
     <form class="w-full flex flex-col sm:flex-row justify-between gap-3 sm:gap-0" action="{{url('/search')}}">
-        <div class="bg-base border-main border grow flex items-center">
-            <span class="pl-2 md:pl-3">🔍</span>
-            <input class="bg-base px-2 py-3 grow outline-none placeholder-gray-400" name="keywords" type="text" maxlength="50"
-                placeholder="Keywords"
-                value="@if(request()->input('keywords')){{request()->input('keywords')}}@endif"></input>
-        </div>
+        <x-form.text 
+            :icon="'🔍'"
+            :name="'keywords'"
+            :placeHolder="'Keywords'"
+            :maxLength="50"
+            :value="request()->input('keywords')?:''"
+            class="grow"
+        ></x-form.text>
         <div class="bg-base border-main border grow flex items-center">
             <span class="pl-2 md:pl-3">🌐</span>
             <select name="country" class="bg-base p-2 py-3 grow outline-none">
@@ -23,7 +25,7 @@
                   @endforeach
             </select>
         </div>
-        <input class="btn-main px-4 py-2" type="submit" value="Search"></input>
+        <x-form.submit :value="'Search'" />
     </form>
     @if ($errors->any())
         <div class="bg-red-200 px-4">

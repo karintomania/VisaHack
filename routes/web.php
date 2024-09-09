@@ -12,3 +12,8 @@ Route::get('/jobs/{id}', JobPost::class);
 
 Route::get('/blogs', [BlogController::class, 'index']);
 Route::get('/blogs/{slug}', [BlogController::class, 'article']);
+
+Route::prefix('/account')->group(function() {
+    Route::get('/login', fn() => view('account.login'));
+    Route::get('/signin', fn() => view('account.signin'));
+});
