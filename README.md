@@ -1,5 +1,9 @@
 # VisaHack
 
+# Dev
+dup
+docker compose exec web bash -c 'npm run dev'
+dsh visahack_web
 
 tar czf visahack.tar.gz visahack
 
