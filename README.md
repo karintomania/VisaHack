@@ -1,19 +1,23 @@
 # VisaHack
 
-# Dev
-dup
-docker compose exec web bash -c 'npm run dev'
-dsh visahack_web
+# Dev Commands
+Build:
+`make build`
 
-tar czf visahack.tar.gz visahack
+Setup:
+`make install`
 
-ln -sfn /var/www/visahack-releases/20240422 /var/www/visahack
+Run:
+`make up`
+
+Stop:
+`make down`
 
 # How to deploy
 Run the shell script to build a deployable source.
 
 ```
-$ sh build.sh
+make deploy-build
 ```
 
 Run deploy script on the server.
