@@ -21,7 +21,7 @@ class GetArticleIdBySlugTest extends TestCase
         // mock cache
         $articleSlugCacheMock = Mockery::mock(
             ArticleSlugCache::class,
-            function (MockInterface $mock) use ($slugStr, $pageId) {
+            function (MockInterface $mock) use ($slugStr, $pageId): void {
                 $slug = new Slug($slugStr, $pageId);
                 $mock->shouldReceive('has')
                     ->with($slugStr)
@@ -52,7 +52,7 @@ class GetArticleIdBySlugTest extends TestCase
         // mock no cache
         $articleSlugCacheMock = Mockery::mock(
             ArticleSlugCache::class,
-            function (MockInterface $mock) use ($slugStr, $pageId) {
+            function (MockInterface $mock) use ($slugStr, $pageId): void {
                 $slug = new Slug($slugStr, $pageId);
 
                 // assert cache check
@@ -70,7 +70,7 @@ class GetArticleIdBySlugTest extends TestCase
 
         // mock API respponse
         $getPageMock = Mockery::mock(
-            CallFindArticleBySlugApi::class, function (MockInterface $mock) use ($pageId) {
+            CallFindArticleBySlugApi::class, function (MockInterface $mock) use ($pageId): void {
                 $json = <<<JSON
                     {
                         "results": [
@@ -101,7 +101,7 @@ class GetArticleIdBySlugTest extends TestCase
         // no cache
         $articleSlugCacheMock = Mockery::mock(
             ArticleSlugCache::class,
-            function (MockInterface $mock) use ($slugStr, $pageId) {
+            function (MockInterface $mock) use ($slugStr, $pageId): void {
                 $slug = new Slug($slugStr, $pageId);
                 $mock->shouldReceive('has')
                     ->with($slugStr)
@@ -111,7 +111,7 @@ class GetArticleIdBySlugTest extends TestCase
 
         // mock API returns no resluts
         $getPageMock = Mockery::mock(
-            CallFindArticleBySlugApi::class, function (MockInterface $mock) {
+            CallFindArticleBySlugApi::class, function (MockInterface $mock): void {
                 $json = <<<'JSON'
                     { "results": [] }
                 JSON;

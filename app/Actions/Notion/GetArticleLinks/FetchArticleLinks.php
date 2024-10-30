@@ -9,9 +9,9 @@ use App\Repository\Notion\ArticleSlugCache;
 class FetchArticleLinks
 {
     public function __construct(
-        private CallArticleLinksApi $api,
-        private ArticleLinkCache $linkCache,
-        private ArticleSlugCache $slugCache,
+        private readonly CallArticleLinksApi $api,
+        private readonly ArticleLinkCache $linkCache,
+        private readonly ArticleSlugCache $slugCache,
     ) {
     }
 

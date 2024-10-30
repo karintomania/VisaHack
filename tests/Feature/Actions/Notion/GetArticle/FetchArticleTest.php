@@ -19,7 +19,7 @@ class FetchArticleTest extends TestCase
 
         $getArticleIdBySlugMock = Mockery::mock(
             GetArticleIdBySlug::class,
-            function (MockInterface $mock) use ($slugStr, $pageId) {
+            function (MockInterface $mock) use ($slugStr, $pageId): void {
                 $mock->shouldReceive('__invoke')
                     ->with($slugStr)
                     ->andReturn($pageId);
@@ -27,8 +27,8 @@ class FetchArticleTest extends TestCase
         );
 
         $callArticleApiMock = Mockery::mock(
-            CallArticleApi::class, function (MockInterface $mock) use ($pageId) {
-                $json = file_get_contents(dirname(__FILE__).'/convert_page_test.json');
+            CallArticleApi::class, function (MockInterface $mock) use ($pageId): void {
+                $json = file_get_contents(__DIR__.'/convert_page_test.json');
                 $mock->shouldReceive('__invoke')
                     ->with($pageId)
                     ->andReturn($json);

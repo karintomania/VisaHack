@@ -32,7 +32,7 @@ class ConvertPageToHtmlTest extends TestCase
         HTML;
         $converter = new ConvertPageToHtml();
 
-        $json = file_get_contents(dirname(__FILE__).'/convert_page_test.json');
+        $json = file_get_contents(__DIR__.'/convert_page_test.json');
 
         $result = $converter->__invoke($json);
 

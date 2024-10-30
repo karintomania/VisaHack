@@ -29,7 +29,7 @@ class SearchJobRequest extends FormRequest
 
         return [
             'keywords' => 'nullable|max:50',
-            'country' => "nullable|in:${countriesStr}",
+            'country' => "nullable|in:{$countriesStr}",
         ];
     }
 }

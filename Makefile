@@ -39,3 +39,15 @@ install: composer-install npm-install laravel-init
 deploy-build:
 	sh build.sh
 
+.PHONY: lint-fix
+lint-fix:
+	docker compose run --rm web bash -c 'php vendor/bin/pint'
+	docker compose run --rm web bash -c 'php vendor/bin/rector'
+
+
+.PHONY: lint
+lint:
+	docker compose run --rm web bash -c 'php vendor/bin/pint --test'
+	docker compose run --rm web bash -c 'php vendor/bin/rector --dry-run'
+	docker compose run --rm web bash -c 'vendor/bin/phpstan analyse app tests --level=9 --memory-limit=512M'
+

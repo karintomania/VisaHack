@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 class SearchController extends Controller
 {
     public function __construct(
-        private JobPost $jobPost,
+        private readonly JobPost $jobPost,
     ) {
     }
 
@@ -34,10 +34,10 @@ class SearchController extends Controller
         $query = JobPost::active();
 
         if (isset($validated['keywords']) && $validated['keywords']) {
-            $keywords = explode(',', $validated['keywords']);
+            $keywords = explode(',', (string) $validated['keywords']);
             foreach ($keywords as $keyword) {
                 $keyword = trim($keyword);
-                $query = $query->where('description', 'like', "%${keyword}%");
+                $query = $query->where('description', 'like', "%{$keyword}%");
             }
         }
 

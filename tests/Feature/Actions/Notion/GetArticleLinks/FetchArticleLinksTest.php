@@ -17,7 +17,7 @@ class FetchArticleLinksTest extends TestCase
     {
 
         $callDbMock = Mockery::mock(
-            CallArticleLinksApi::class, function (MockInterface $mock) {
+            CallArticleLinksApi::class, function (MockInterface $mock): void {
                 $links = $this->generateTestLinks();
                 $mock->shouldReceive('__invoke')
                     ->andReturn($links);
@@ -25,7 +25,7 @@ class FetchArticleLinksTest extends TestCase
         );
 
         $articleLinkCacheMock = Mockery::mock(
-            ArticleLinkCache::class, function (MockInterface $mock) {
+            ArticleLinkCache::class, function (MockInterface $mock): void {
                 $mock->shouldReceive('has')
                     ->andReturn(false);
                 $mock->shouldReceive('store');
@@ -57,7 +57,7 @@ class FetchArticleLinksTest extends TestCase
      */
     private function generateTestLinks(): array
     {
-        $json = file_get_contents(dirname(__FILE__).'/article_links.json');
+        $json = file_get_contents(__DIR__.'/article_links.json');
 
         $jsonData = json_decode($json, true);
 
